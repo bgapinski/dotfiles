@@ -60,7 +60,7 @@ set ruler
 set scrolloff=5
 set showmode
 set showcmd
-set ttyfast
+" set ttyfast
 
 set autoread
 set encoding=utf-8
