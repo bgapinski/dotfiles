@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/home/brian/.oh-my-zsh/themes'
-let g:netrw_dirhist_2='/home/brian/.oh-my-zsh'
-let g:netrw_dirhist_3='/home/brian/.oh-my-zsh/custom'
-let g:netrw_dirhist_4='/home/brian/.oh-my-zsh/custom/themes'
-let g:netrw_dirhist_5='/home/brian/.oh-my-zsh/themes'
-let g:netrw_dirhist_6='/home/brian'
-let g:netrw_dirhist_7='/home/brian/.oh-my-zsh'
