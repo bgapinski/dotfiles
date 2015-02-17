@@ -1,0 +1,9 @@
+#/usr/bin/env bash
+
+state=$(xrandr | grep HDMI1)
+
+if [[ "${state}" == "HDMI1 connected (normal left inverted right x axis y axis)" ]] ; then
+  xrandr --output HDMI1 --mode 1920x1080 --left-of eDP1
+else
+  xrandr --output HDMI1 --off
+fi

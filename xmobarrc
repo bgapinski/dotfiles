@@ -1,0 +1,40 @@
+Config { font = "xft:Source Code Pro :size=16"
+       , bgColor = "#2b2b2b" -- Solarized black
+       , fgColor = "#dedede" -- Solarized white
+       , position = Top
+       , border  = NoBorder
+       , borderColor  = "black"
+       , persistent = True
+       , lowerOnStart = True
+       , hideOnStart = False
+       , allDesktops = False
+       , overrideRedirect = False
+       , commands = 
+           [ Run Network "wlp1s0" [ "-L","0","-H","32","--normal"
+                                  , "green","--high","red"
+                                  ] 10
+           , Run Cpu [ "-L","3","-H","50","--normal"
+                     , "green","--high","red"
+                     ] 10
+           , Run Memory [ "-t","Mem: <usedratio>%"] 10
+           , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+           , Run StdinReader
+           , Run BatteryP [ "BAT1" ]
+                          [ "-t", "Batt: <left>%"
+                          , "--", "-O", "<fc=green>0n</fc> - ", "-o", ""
+                          , "-L", "-15", "-H", "-5"
+                          , "-l", "red", "-m", "blue", "-h", "green"
+                          ] 600
+           , Run Brightness [ "-t", "Bright: <percent>%" 
+                            , "--"
+                            , "-D", "intel_backlight"
+                            ] 60
+           , Run Kbd [("us(dvorak)", "DV"), ("us", "US")]
+           ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%cpu% | %memory% | %wlp1s0% | %kbd% } %StdinReader% { %bright% | %battery% | <fc=#ee9a00>%date%</fc>"
+       }
+
+-- "#d70000"   --Sol red
+ -- "#859900" --Sol green

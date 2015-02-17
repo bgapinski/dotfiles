@@ -1,0 +1,9 @@
+[user]
+	email = bgapinski@gmail.com
+	name = Brian Gapinski
+[push]
+	default = simple
+[merge]
+  tool = meld
+[core]
+	editor = vim

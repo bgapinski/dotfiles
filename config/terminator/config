@@ -1,0 +1,25 @@
+[global_config]
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  suppress_multiple_term_dialog = True
+[keybindings]
+[profiles]
+  [[default]]
+    scrollbar_position = hidden
+    use_system_font = False
+    login_shell = True
+    background_darkness = 0.9
+    background_image = None
+    foreground_color = "#dedede"
+    show_titlebar = False
+    font = Source Code Pro 18
+    background_color = "#2b2b2b"
+    scrollback_infinite = True
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]
