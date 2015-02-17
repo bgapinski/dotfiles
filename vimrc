@@ -106,6 +106,7 @@ set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
 set undofile
 
+set sessionoptions=blank,buffers,curdir,folds,globals,help,localoptions,options,resize,tabpages,winsize,winpos
 cmap w!! %!sudo tee > /dev/null %
 
 set formatprg="PARINIT='rTbgqR B=.,?_A_a Q=_s>|' par\ -w72"
@@ -162,6 +163,7 @@ endif
 set t_Co=256
 set background=dark
 colorscheme hybrid
+hi Normal ctermbg = none
 
 hi! link SignColumn LineNr
 hi! link SyntasticErrorSign ErrorMsg
@@ -186,7 +188,7 @@ augroup END
 nmap <silent> <leader><cr> :noh\|hi Cursor guibg=red<cr>
 augroup haskell
   autocmd!
-  " autocmd FileType haskell map <silent> <leader><cr> :noh<cr>:GhcModTypeClear<cr>:SyntasticReset<cr>
+  autocmd FileType haskell map <silent> <leader><cr> :noh<cr>:GhcModTypeClear<cr>:SyntasticReset<cr>
   autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 augroup END
 

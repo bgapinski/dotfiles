@@ -1,0 +1,1 @@
+compton -GCcfb --focus-exclude 'class_g = "dmenu"' -o 0.8 -i 0.5 --focus-exclude 'class_g = "xlock"' --mark-ovredir-focused

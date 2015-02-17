@@ -1,9 +1,15 @@
 [user]
-	email = bgapinski@gmail.com
-	name = Brian Gapinski
+  email = bgapinski@gmail.com
+  name = Brian Gapinski
 [push]
-	default = simple
+  default = simple
 [merge]
   tool = meld
 [core]
-	editor = vim
+  editor = vim
+  pager = less -FRSX
+[color]
+  diff = true
+  status = true
+  branch = true
+  ui = true

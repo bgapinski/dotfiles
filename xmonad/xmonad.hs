@@ -1,13 +1,34 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Util.EZConfig
+import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.NoBorders
 import XMonad.Actions.Search
 import XMonad.Prompt
+import XMonad.Hooks.FadeInactive
 
-main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
+main = do
+  xmproc <- statusBar myBar myPP toggleStrutsKey myConfig
+  xmonad $ withUrgencyHook NoUrgencyHook defaults {logHook = logToHandle xmproc}
+
+myLogHook :: X ()
+myLogHook = do
+  fadeInactiveLogHook 0.85
+
+logToHandle :: Handle -> X ()
+logToHandle p = dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn p }
 
 myBar = "xmobar"
+
+myTerminal      = "terminator"
+
+myFocusFollowsMouse = False
+
+myClickJustFocuses = False
+
+myBorderWidth = 0
+
+myModMask = mod4Mask
 
 myPP = xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" }
 
@@ -19,8 +40,6 @@ myKeys = [ ("<XF86AudioRaiseVolume>", spawn "pamixer --increase 5")
          , ("<XF86AudioNext>", spawn "playerctl next")
          , ("<XF86AudioPrev>", spawn "playerctl previous")
          , ("<XF86AudioPlay>", spawn "playerctl play-pause")
-         -- , ("<XF86MonBrightnessUp>", spawn "changeBrightness --inc")
-         -- , ("<XF86MonBrightnessDown>", spawn "changeBrightness --dec")
          , ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 5")
          , ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 5")
          , ("M-c", spawn "chromium")
@@ -48,11 +67,12 @@ myRemKeys = []
 myLayout = smartBorders $ (layoutHook defaultConfig) ||| noBorders Full
 
 myConfig = defaultConfig
-    { terminal          = "terminator"
-    , modMask           = mod4Mask
-    , borderWidth       = 2
-    , focusFollowsMouse = False
-    , clickJustFocuses   = False
+    { terminal          = myTerminal
+    , modMask           = myModMask
+    , borderWidth       = myBorderWidth
+    , focusFollowsMouse = myFocusFollowsMouse
+    , clickJustFocuses  = myClickJustFocuses
     , layoutHook        = myLayout
+    , logHook           = myLogHook
     } `removeKeysP` myRemKeys
       `additionalKeysP` myKeys

@@ -62,7 +62,10 @@ OPP_INDICATOR="%{$fg_bold[yellow]%}[% O]% %{$reset_color%}"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(gitfast colored-man vi-mode-custom opp opp-surround)
+plugins=(gitfast tmux colored-man vi-mode-custom opp opp-surround)
+
+ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOQUIT=false
 
 source $ZSH/oh-my-zsh.sh
 export EDITOR=vim

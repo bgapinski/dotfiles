@@ -1,5 +1,7 @@
 [global_config]
+  geometry_hinting = False
   enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  borderless = True
   suppress_multiple_term_dialog = True
 [keybindings]
 [profiles]
@@ -7,9 +9,11 @@
     scrollbar_position = hidden
     use_system_font = False
     login_shell = True
-    background_darkness = 0.9
+    background_darkness = 0.8
+    background_type = transparent
     background_image = None
     foreground_color = "#dedede"
+    icon_bell = False
     show_titlebar = False
     font = Source Code Pro 18
     background_color = "#2b2b2b"
