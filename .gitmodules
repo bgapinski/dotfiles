@@ -10,3 +10,9 @@
 [submodule "tmux/plugins/tmux-copycat"]
 	path = tmux/plugins/tmux-copycat
 	url = https://github.com/tmux-plugins/tmux-copycat
+[submodule "tmux/plugins/tmux-sensible"]
+	path = tmux/plugins/tmux-sensible
+	url = https://github.com/tmux-plugins/tmux-sensible
+[submodule "tmux/plugins/tpm"]
+	path = tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
