@@ -7,3 +7,6 @@
 [submodule "oh-my-zsh-custom"]
 	path = oh-my-zsh-custom
 	url = git@github.com:bgapinski/oh-my-zsh-custom
+[submodule "tmux/plugins/tmux-copycat"]
+	path = tmux/plugins/tmux-copycat
+	url = https://github.com/tmux-plugins/tmux-copycat
