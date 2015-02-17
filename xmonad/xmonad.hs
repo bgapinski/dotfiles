@@ -1,22 +1,16 @@
 import XMonad
+import XMonad.Config
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.FadeInactive
 import XMonad.Util.EZConfig
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.NoBorders
 import XMonad.Actions.Search
 import XMonad.Prompt
-import XMonad.Hooks.FadeInactive
 
-main = do
-  xmproc <- statusBar myBar myPP toggleStrutsKey myConfig
-  xmonad $ withUrgencyHook NoUrgencyHook defaults {logHook = logToHandle xmproc}
+import System.IO
 
-myLogHook :: X ()
-myLogHook = do
-  fadeInactiveLogHook 0.85
-
-logToHandle :: Handle -> X ()
-logToHandle p = dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn p }
+main = statusBar myBar myPP toggleStrutsKey myConfig >>= xmonad
 
 myBar = "xmobar"
 
@@ -73,6 +67,5 @@ myConfig = defaultConfig
     , focusFollowsMouse = myFocusFollowsMouse
     , clickJustFocuses  = myClickJustFocuses
     , layoutHook        = myLayout
-    , logHook           = myLogHook
     } `removeKeysP` myRemKeys
       `additionalKeysP` myKeys
