@@ -38,6 +38,7 @@ Plugin 'bgapinski/vim2hs' "Personal fork
 Plugin 'eagletmt/neco-ghc'
 Plugin 'Twinside/vim-hoogle'
 Plugin 'idris-hackers/idris-vim'
+Plugin 'tmux-plugins/vim-tmux'
 
 " Theme
 Plugin 'w0ng/vim-hybrid'
