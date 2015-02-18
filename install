@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+set -eu
+
+backup_file () {
+  FILE=$1
+  BACKUPDIR="$HOME/.old-dotfiles"
+  PARENT=$2
+  if [ ! -d "$BACKUPDIR" ]
+  then
+    mkdir -p "$BACKUPDIR"
+  fi
+  if [ ! -z "$PARENT" ]
+  then
+    mkdir -p "$BACKUPDIR/$PARENT"
+  fi
+  mv "$HOME/.$FILE" "$BACKUPDIR/${FILE#.}"
+}
+
+make_syms () {
+  FILES=$1
+  PARENT=${2-""}
+  WD=$(pwd)
+
+  for f in $FILES/*
+  do
+    f_base="$PARENT$(basename "$f")"
+    if [ -e "$HOME/.$f_base" ]
+    then
+      backup_file "$f_base" "$PARENT"
+    fi
+
+    if [ ! -z "$PARENT" ] && [ ! -d "$HOME/.$PARENT" ]
+    then
+      mkdir -p "$HOME/.$PARENT"
+    fi
+
+    ln -sf "$WD/$f" "$HOME/.$f_base"
+  done
+}
+
+make_nested_syms () {
+  PARENT=$1
+  for p in $PARENT/*
+  do
+    make_syms $p "$(basename $p)/"
+  done
+}
+
+make_oh_my_zsh_custom_links () {
+  make_syms "oh-my-zsh-custom/themes" "oh-my-zsh/custom/themes/"
+  make_syms "oh-my-zsh-custom/plugins" "oh-my-zsh/custom/plugins/"
+}
+
+make_syms files
+make_nested_syms nested
+make_oh_my_zsh_custom_links
