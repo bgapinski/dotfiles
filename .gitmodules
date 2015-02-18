@@ -1,30 +1,30 @@
 [submodule "vim/bundle/Vundle.vim"]
-	path = vim/bundle/Vundle.vim
+	path = files/vim/bundle/Vundle.vim
 	url = git@github.com:gmarik/Vundle.vim
 [submodule "oh-my-zsh"]
-	path = oh-my-zsh
+	path = files/oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
 [submodule "oh-my-zsh-custom"]
 	path = oh-my-zsh-custom
 	url = git@github.com:bgapinski/oh-my-zsh-custom
 [submodule "tmux/plugins/tmux-copycat"]
-	path = tmux/plugins/tmux-copycat
+	path = files/tmux/plugins/tmux-copycat
 	url = https://github.com/tmux-plugins/tmux-copycat
 [submodule "tmux/plugins/tmux-sensible"]
-	path = tmux/plugins/tmux-sensible
+	path = files/tmux/plugins/tmux-sensible
 	url = https://github.com/tmux-plugins/tmux-sensible
 [submodule "tmux/plugins/tpm"]
-	path = tmux/plugins/tpm
+	path = files/tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
 [submodule "tmux/plugins/tmux-sessionist"]
-	path = tmux/plugins/tmux-sessionist
+	path = files/tmux/plugins/tmux-sessionist
 	url = git@github.com:tmux-plugins/tmux-sessionist
 [submodule "tmux/plugins/tmux-yank"]
-	path = tmux/plugins/tmux-yank
+	path = files/tmux/plugins/tmux-yank
 	url = git@github.com:tmux-plugins/tmux-yank
 [submodule "tmux/plugins/tmux-resurrect"]
-	path = tmux/plugins/tmux-resurrect
+	path = files/tmux/plugins/tmux-resurrect
 	url = git@github.com:tmux-plugins/tmux-resurrect
 [submodule "tmux/plugins/tmux-resurrect-auto"]
-	path = tmux/plugins/tmux-resurrect-auto
+	path = files/tmux/plugins/tmux-resurrect-auto
 	url = git@github.com:tmux-plugins/tmux-resurrect-auto
