@@ -39,6 +39,15 @@ Plugin 'eagletmt/neco-ghc'
 Plugin 'Twinside/vim-hoogle'
 Plugin 'idris-hackers/idris-vim'
 Plugin 'tmux-plugins/vim-tmux'
+Plugin 'nvie/vim-flake8'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'dag/vim-fish'
+
+"Instantly Better Plugins
+Plugin 'shinokada/listtrans.vim'
+Plugin 'atweiden/vim-vmath'
+Plugin 'jondkinney/dragvisuals.vim'
+"  Lookup vis.vim at some point
 
 " Theme
 Plugin 'w0ng/vim-hybrid'
@@ -72,15 +81,20 @@ set wildmenu
 set wildmode=list:longest,full
 set wildignore+=*.o,*.hi,*.aux,*.pyc,*.class
 
+" Show bad whitespace
 set list
+" Need to change the color. Probably in color scheme
+" highlight NonText ctermfg=red
 if &listchars ==# 'eol:$'
-  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+  exec "set listchars=tab:\uBB\uBB,trail:\uB7,extends:>,precedes:<,nbsp:~"
 endif
 
 set cmdheight=1
 
 syntax enable
 filetype plugin on
+
+set shell=zsh
 
 set shortmess=atI
 
@@ -115,6 +129,10 @@ let $PATH = $PATH . ':' . expand("~/.vimscripts")
 
 set mouse=a
 
+" Color long lines
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%79v', 100)
+
 " Key rebindings
 let mapleader = "\<Space>"
 set tm=2000
@@ -138,6 +156,10 @@ noremap <Leader>b<space> :CtrlPBuffer<CR>
 nnoremap <Leader>ma :set mouse=a<CR>
 nnoremap <Leader>mo :set mouse=<CR>
 
+" Change comma lists to bullet lists and vice versa
+nmap <Leader>l :call ListTrans_toggle_format()<CR>
+vmap <Leader>l :call ListTrans_toggle_format('visual')<CR>
+
 nnoremap ; :
 nnoremap j gj
 nnoremap k gk
@@ -156,6 +178,11 @@ map <S-E> <Plug>CamelCaseMotion_e
 
 nmap <Leader>nh :let @/=''<CR>
 
+let g:slime_no_mappings = 1
+xmap <leader>s <Plug>SlimeRegionSend
+nmap <leader>s <Plug>SlimeMotionSend
+nmap <leader>ss <Plug>SlimeLineSend
+
 " Terminal color
 if &term =~ '256color'
   set t_ut=
@@ -173,6 +200,26 @@ hi! link SyntasticWarningSign WarningMsg
 hi Search ctermfg=white ctermbg=173 cterm=none guifg=#ffffff guibg=#e5786d gui=none
 hi! link Visual Search
 
+" " This rewires n and N to do the highlighing...
+" nnoremap <silent> n   n:call HLNext(0.4)<cr>
+" nnoremap <silent> N   N:call HLNext(0.4)<cr>
+
+" " OR ELSE just highlight the match in red...
+" function! HLNext (blinktime)
+"     let [bufnum, lnum, col, off] = getpos('.')
+"     let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+"     let target_pat = '\c\%#\%('.@/.'\)'
+"     let blinks = 3
+"     for n in range(1, blinks)
+"       let red = matchadd('WhiteOnRed', target_pat, 101)
+"       redraw
+"       exec 'sleep ' . float2nr(a:blinktime / (2 * blinks) * 1000) . 'm'
+"       call matchdelete(red)
+"       redraw
+"       exec 'sleep ' . float2nr(a:blinktime / (2 * blinks) * 1000) . 'm'
+"     endfor
+" endfunction
+
 " Various plugin initialization
 " let g:neocomplete#enable_at_startup = 1
 let g:neocomplcache#enable_at_startup = 1
@@ -180,6 +227,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:ctrlp_map = '<Leader>e'
 let g:haskell_conceal = 0
 let g:necoghc_enable_detailed_browse = 1
+autocmd BufWritePost *.py call Flake8()
 
 augroup sourcing
   autocmd!
@@ -204,10 +252,10 @@ augroup END
 set viminfo^=%
 
 " Open window splits in various places
-nmap <leader>sh :leftabove  vnew<CR>
-nmap <leader>sl :rightbelow vnew<CR>
-nmap <leader>sk :leftabove  new<CR>
-nmap <leader>sj :rightbelow new<CR>
+nmap <leader>wh :leftabove  vnew<CR>
+nmap <leader>wl :rightbelow vnew<CR>
+nmap <leader>wk :leftabove  new<CR>
+nmap <leader>wj :rightbelow new<CR>
 
 " Delete trailing white space on save
 func! DeleteTrailingWS()
@@ -219,6 +267,7 @@ endfunc
 augroup whitespace
   autocmd!
   autocmd BufWrite *.hs :call DeleteTrailingWS()
+  autocmd BufWrite *.py :call DeleteTrailingWS()
 augroup END
 
 let g:tagbar_type_haskell = {
@@ -317,3 +366,5 @@ au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
 
 let g:slime_target = "tmux"
 let g:slime_paste_file = tempname()
+let g:slime_python_ipython = 1
+
