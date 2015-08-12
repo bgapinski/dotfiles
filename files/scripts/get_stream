@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+stream=$(cmus-remote -Q | ag "stream ")
+
+if [ $stream ]
+then
+  stream_name=${stream:7}
+
+  if [[ ${#stream_name} -gt 40 ]]
+  then
+    stream_name="${stream_name:0:37}..."
+  fi
+else
+  stream_name=$(cmus-remote -C 'format_print %t')
+fi
+
+
+echo $stream_name

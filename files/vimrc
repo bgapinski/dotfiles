@@ -1,4 +1,4 @@
-set nocompatible
+" set nocompatible
 filetype off
 
 
@@ -58,9 +58,9 @@ filetype plugin indent on
 " Basic settings
 set autoindent
 set expandtab
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set smarttab
 set backspace=indent,eol,start
 set number
@@ -157,8 +157,8 @@ nnoremap <Leader>ma :set mouse=a<CR>
 nnoremap <Leader>mo :set mouse=<CR>
 
 " Change comma lists to bullet lists and vice versa
-nmap <Leader>l :call ListTrans_toggle_format()<CR>
-vmap <Leader>l :call ListTrans_toggle_format('visual')<CR>
+" nmap <Leader>l :call ListTrans_toggle_format()<CR>
+" vmap <Leader>l :call ListTrans_toggle_format('visual')<CR>
 
 nnoremap ; :
 nnoremap j gj
@@ -193,9 +193,30 @@ set background=dark
 colorscheme hybrid
 hi Normal ctermbg = none
 
+" Syntastic stuff
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_highlighting = 1
+let g:syntastic_auto_jump = 3
+let g:syntastic_enable_signs = 1
+
 hi! link SignColumn LineNr
 hi! link SyntasticErrorSign ErrorMsg
 hi! link SyntasticWarningSign WarningMsg
+
+" Scala config for synastic
+let g:syntastic_scala_scalastyle_jar = '/home/brian/.linters/scalastyle_2.11.jar' 
+let g:syntastic_scala_scalastyle_config_file = '/home/brian/.linters/scalastyle-config.xml'
+let g:syntastic_scala_checkers=['scalastyle', 'scalac']
+
+nmap <Leader>ln :lnext<CR>
+nmap <Leader>lp :lprev<CR>
 
 hi Search ctermfg=white ctermbg=173 cterm=none guifg=#ffffff guibg=#e5786d gui=none
 hi! link Visual Search
@@ -234,12 +255,12 @@ augroup sourcing
   autocmd bufwritepost .vimrc source $MYVIMRC
 augroup END
 
-nmap <silent> <leader><cr> :noh\|hi Cursor guibg=red<cr>
-augroup haskell
-  autocmd!
-  autocmd FileType haskell map <silent> <leader><cr> :noh<cr>:GhcModTypeClear<cr>:SyntasticReset<cr>
-  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-augroup END
+" nmap <silent> <leader><cr> :noh\|hi Cursor guibg=red<cr>
+" augroup haskell
+"   autocmd!
+"   autocmd FileType haskell map <silent> <leader><cr> :noh<cr>:GhcModTypeClear<cr>:SyntasticReset<cr>
+"   autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+" augroup END
 
 augroup last_edit
   autocmd!
@@ -268,6 +289,7 @@ augroup whitespace
   autocmd!
   autocmd BufWrite *.hs :call DeleteTrailingWS()
   autocmd BufWrite *.py :call DeleteTrailingWS()
+  autocmd BufWrite *.scala :call DeleteTrailingWS()
 augroup END
 
 let g:tagbar_type_haskell = {
@@ -329,21 +351,21 @@ set completeopt+=longest
 " GHC errors and warnings
 " nmap <silent> <leader>hc :SyntasticCheck ghc_mod<CR>
 " Haskell Lint
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['haskell'] }
-nmap <silent> <leader>hl :SyntasticCheck hlint<CR>
+" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['haskell'] }
+" nmap <silent> <leader>hl :SyntasticCheck hlint<CR>
 
 " Hoogle the word under the cursor
 nnoremap <silent> <leader>hh :Hoogle<CR>
 
 let g:hoogle_search_databases = "/home/brian/hoogle"
 " Hoogle and prompt for input
-nnoremap <leader>hH :Hoogle 
+nnoremap <leader>hH :Hoogle
 
 " Hoogle for detailed documentation (e.g. "Functor")
 nnoremap <silent> <leader>hi :HoogleInfo<CR>
 
 " Hoogle for detailed documentation and prompt for input
-nnoremap <leader>hI :HoogleInfo 
+nnoremap <leader>hI :HoogleInfo
 
 " Hoogle, close the Hoogle window
 nnoremap <silent> <leader>hz :HoogleClose<CR>
@@ -367,4 +389,3 @@ au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
 let g:slime_target = "tmux"
 let g:slime_paste_file = tempname()
 let g:slime_python_ipython = 1
-

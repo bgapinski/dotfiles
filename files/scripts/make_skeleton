@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+
+set -e
+
+SCRIPT=$(basename ${BASH_SOURCE[0]})
+VIRTUALENV=false
+
+# TODO: Add python version flag
+function HELP {
+  echo -e "USAGE: $SCRIPT [OPTIONS] PROJECT\n"
+  echo -e "\tPROJECT\tName of the project"
+  echo -e "\t-s\tEnable virtualenv"
+  echo -e "\t-h\tDisplay this help message and exit"
+  exit 1
+}
+
+NUMARGS=$#
+if [ $NUMARGS -eq 0 ]
+then
+  HELP
+fi
+
+while getopts :s opt
+do
+  case $opt in
+    s) 
+      VIRTUALENV=true
+      ;;
+    h)
+      HELP
+      ;;
+  esac
+done
+      
+shift $(( OPTIND - 1 ));
+
+# Create skeleton directory
+PROJECT=$1
+PROJECT_NAME=$(basename $PROJECT)
+
+CURR_DIR=$(pwd)
+mkdir -p $PROJECT
+cd $PROJECT
+
+if $VIRTUALENV 
+then
+  echo "Initializing virtualenv..."
+  virtualenv . &> /dev/null
+  source ./bin/activate
+  pip install distribute &> /dev/null
+  pip install nose &> /dev/null
+  mkdir $PROJECT_NAME
+  cd $PROJECT_NAME
+fi
+
+mkdir bin docs $PROJECT_NAME tests
+
+touch $PROJECT_NAME/__init__.py
+touch tests/__init__.py
+
+# TODO: Add a template/config to fill in author info
+cat <<SETUP > setup.py
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
+
+config = {
+    'description': 'My Project',
+    'author': 'My Name',
+    'url': 'URL to get it at.',
+    'download_url': 'Where to download it.',
+    'author_email': 'My email.',
+    'version': '0.1',
+    'install_requires': ['nose'],
+    'packages': ['$PROJECT_NAME'],
+    'scripts': [],
+    'name': '$PROJECT_NAME'
+}
+
+setup(**config)
+SETUP
+
+cat <<TEST > tests/"$PROJECT_NAME"_tests.py
+from nose.tools import *
+import $PROJECT_NAME
+
+
+def setup():
+    print("SETUP!")
+
+
+def teardown():
+    print("TEAR DOWN!")
+
+
+def test_basic():
+    print("I RAN!")
+TEST
+
+exit 0

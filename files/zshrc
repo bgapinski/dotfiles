@@ -31,11 +31,13 @@ fignore=(.o .hi .aux .pyc .class)
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias pacman="sudo powerpill"
 alias tmux="tmux -2"
-alias python="python3"
+alias python="ipython3"
+alias python2="ipython2"
 alias pip="pip3"
 alias vim="nvim"
 alias vmi="nvim"
 alias hibernate="systemctl hibernate"
+alias diff="colordiff"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -62,18 +64,22 @@ OPP_INDICATOR="%{$fg_bold[yellow]%}[% O]% %{$reset_color%}"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(gitfast tmux-custom colored-man vi-mode-custom opp opp-surround)
+plugins=(gitfast tmux-custom colored-man vi-mode-custom opp opp-surround pip systemd vundle)
 
-ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_AUTOQUIT=false
 
 source $ZSH/oh-my-zsh.sh
 export EDITOR=vim
 
+export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
+export LESS=" -R "
+
 # Customize to your needs...
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/brian/.cabal/bin:/home/brian/.scripts:$PATH
+export PATH=/home/brian/.cabal/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/brian/.scripts:$PATH
 
 export WECHALLUSER="xechas"
 export WECHALLTOKEN="D5B30-17222-EDA30-4E1C4-BFF39-587BC"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

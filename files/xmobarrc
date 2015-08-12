@@ -1,4 +1,4 @@
-Config { font = "xft:Source Code Pro :size=16"
+Config { font = "xft:Source Code Pro :size=12"
        , bgColor = "#2b2b2b" -- Solarized black
        , fgColor = "#dedede" -- Solarized white
        , position = Top
@@ -9,6 +9,7 @@ Config { font = "xft:Source Code Pro :size=16"
        , hideOnStart = False
        , allDesktops = False
        , overrideRedirect = False
+       , alpha = 100
        , commands = 
            [ Run Network "wlp1s0" [ "-L","0","-H","32","--normal"
                                   , "green","--high","red"
@@ -30,10 +31,11 @@ Config { font = "xft:Source Code Pro :size=16"
                             , "-D", "intel_backlight"
                             ] 60
            , Run Kbd [("us(dvorak)", "DV"), ("us", "US")]
+           , Run Com "/home/brian/.scripts/get_stream" [] "stream" 10
            ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%cpu% | %memory% | %wlp1s0% | %kbd% } %StdinReader% { %bright% | %battery% | <fc=#ee9a00>%date%</fc>"
+       , template = "%cpu% | %memory% | %wlp1s0% | %kbd% | %stream% } %StdinReader% { %bright% | %battery% | <fc=#ee9a00>%date%</fc>"
        }
 
 -- "#d70000"   --Sol red
