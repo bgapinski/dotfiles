@@ -7,7 +7,7 @@ autoload -U colors && colors
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="my-theme"
+ZSH_THEME="gentoo"
 
 fancy-ctrl-z () {
     if [[ $#BUFFER -eq 0 ]]; then
@@ -82,4 +82,4 @@ export WECHALLUSER="xechas"
 export WECHALLTOKEN="D5B30-17222-EDA30-4E1C4-BFF39-587BC"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

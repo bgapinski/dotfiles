@@ -1,4 +1,4 @@
-" set nocompatible
+set nocompatible
 filetype off
 
 
@@ -12,6 +12,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/syntastic'
 " Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/neocomplcache.vim'
+"TODO deocomplete
 Plugin 'Shougo/vimproc.vim' "ghc-mod dependency
 Plugin 'Shougo/vimshell.vim'
 

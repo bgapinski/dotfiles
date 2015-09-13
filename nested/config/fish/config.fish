@@ -6,4 +6,4 @@
 # end
 
 fish_vi_mode
-set -gx PATH $PATH /home/brian/.scripts
+set -gx PATH /home/brian/.cabal/bin /home/brian/.scripts $PATH

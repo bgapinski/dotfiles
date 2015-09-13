@@ -9,9 +9,9 @@ Config { font = "xft:Source Code Pro :size=12"
        , hideOnStart = False
        , allDesktops = False
        , overrideRedirect = False
-       , alpha = 100
+       , alpha = 204
        , commands = 
-           [ Run Network "wlp1s0" [ "-L","0","-H","32","--normal"
+           [ Run Network "wlp3s0" [ "-L","0","-H","32","--normal"
                                   , "green","--high","red"
                                   ] 10
            , Run Cpu [ "-L","3","-H","50","--normal"
@@ -35,7 +35,7 @@ Config { font = "xft:Source Code Pro :size=12"
            ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%cpu% | %memory% | %wlp1s0% | %kbd% | %stream% } %StdinReader% { %bright% | %battery% | <fc=#ee9a00>%date%</fc>"
+       , template = "%cpu% | %memory% | %wlp3s0% | %kbd% | %stream% } %StdinReader% { <fc=#ee9a00>%date%</fc>"
        }
 
 -- "#d70000"   --Sol red
