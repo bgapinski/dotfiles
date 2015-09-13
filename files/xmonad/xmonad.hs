@@ -1,17 +1,18 @@
 import XMonad
+import XMonad.Actions.Search
 import XMonad.Config
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.SetWMName
-import XMonad.Util.EZConfig
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.NoBorders
-import XMonad.Actions.Search
 import XMonad.Prompt
+import XMonad.Util.EZConfig
 
 import System.IO
 
-main = statusBar myBar myPP toggleStrutsKey myConfig >>= xmonad
+main = statusBar myBar myPP toggleStrutsKey (ewmh myConfig) >>= xmonad
 
 myBar = "xmobar"
 

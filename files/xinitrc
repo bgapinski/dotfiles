@@ -10,7 +10,8 @@ xflux -z 11217
 #/usr/bin/xscreensaver -no-splash &
 #xss-lock -- xscreensaver-command -lock &
 
-#touchegg &
+touchegg &
+dunst -conf /home/brian/.dunstrc &
 
 feh --bg-scale ~/.wallpaper
 
