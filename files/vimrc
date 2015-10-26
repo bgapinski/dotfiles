@@ -1,58 +1,50 @@
-" set nocompatible
-filetype off
-
-
-" Vundle requirements
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin()
 
 " All the plugins
-Plugin 'gmarik/Vundle.vim'
-
-Plugin 'scrooloose/syntastic'
-" Plugin 'Shougo/neocomplete.vim'
-Plugin 'Shougo/neocomplcache.vim'
-Plugin 'Shougo/vimproc.vim' "ghc-mod dependency
-Plugin 'Shougo/vimshell.vim'
+Plug 'scrooloose/syntastic'
+" Plug 'Shougo/neocomplete.vim' " Does not work with neovim
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/vimproc.vim' "ghc-mod dependency
+" Plug 'Shougo/vimshell.vim'
 
 " Other plugins
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-vinegar'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-abolish'
-Plugin 'Townk/vim-autoclose'
-Plugin 'airblade/vim-gitgutter'
-"Plugin 'zhaocai/GoldenView.Vim'
-Plugin 'bling/vim-airline'
-Plugin 'kien/ctrlp.vim'
-Plugin 'bkad/CamelCaseMotion'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-abolish'
+Plug 'Townk/vim-autoclose'
+Plug 'airblade/vim-gitgutter'
+"Plug 'zhaocai/GoldenView.Vim'
+Plug 'bling/vim-airline'
+Plug 'kien/ctrlp.vim'
+Plug 'bkad/CamelCaseMotion'
+Plug 'sjl/gundo.vim'
 
-Plugin 'moll/vim-bbye'
-Plugin 'majutsushi/tagbar'
-Plugin 'jpalardy/vim-slime'
+Plug 'moll/vim-bbye'
+Plug 'majutsushi/tagbar'
+Plug 'jpalardy/vim-slime'
 
 " Language plugins
-"Plugin 'raichoo/haskell-vim'
-Plugin 'bgapinski/vim2hs' "Personal fork
-" Plugin 'eagletmt/ghcmod-vim'
-Plugin 'eagletmt/neco-ghc'
-Plugin 'Twinside/vim-hoogle'
-Plugin 'idris-hackers/idris-vim'
-Plugin 'tmux-plugins/vim-tmux'
-Plugin 'nvie/vim-flake8'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'dag/vim-fish'
+" Plug 'neovimhaskell/haskell-vim'
+Plug 'bgapinski/vim2hs' "Personal fork
+" Plin 'eagletmt/ghcmod-vim'
+Plug 'eagletmt/neco-ghc'
+Plug 'Twinside/vim-hoogle'
+Plug 'idris-hackers/idris-vim'
+Plug 'tmux-plugins/vim-tmux'
+Plug 'nvie/vim-flake8'
+Plug 'derekwyatt/vim-scala'
+Plug 'dag/vim-fish'
 
 "Instantly Better Plugins
-Plugin 'shinokada/listtrans.vim'
-Plugin 'atweiden/vim-vmath'
-Plugin 'jondkinney/dragvisuals.vim'
-"  Lookup vis.vim at some point
+Plug 'shinokada/listtrans.vim'
+Plug 'atweiden/vim-vmath'
+Plug 'jondkinney/dragvisuals.vim'
 
 " Theme
-Plugin 'w0ng/vim-hybrid'
+Plug 'w0ng/vim-hybrid'
 
-call vundle#end()
+call plug#end()
 filetype plugin indent on
 
 " Basic settings
@@ -72,7 +64,7 @@ set showcmd
 " set ttyfast
 
 set autoread
-set encoding=utf-8
+" set encoding=utf-8
 set ffs=unix
 
 set laststatus=2
@@ -200,10 +192,10 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_highlighting = 1
-let g:syntastic_auto_jump = 3
+" let g:syntastic_auto_jump = 3
 let g:syntastic_enable_signs = 1
 
 hi! link SignColumn LineNr
@@ -243,7 +235,7 @@ hi! link Visual Search
 
 " Various plugin initialization
 " let g:neocomplete#enable_at_startup = 1
-let g:neocomplcache#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:ctrlp_map = '<Leader>e'
 let g:haskell_conceal = 0
@@ -255,12 +247,12 @@ augroup sourcing
   autocmd bufwritepost .vimrc source $MYVIMRC
 augroup END
 
-" nmap <silent> <leader><cr> :noh\|hi Cursor guibg=red<cr>
-" augroup haskell
-"   autocmd!
-"   autocmd FileType haskell map <silent> <leader><cr> :noh<cr>:GhcModTypeClear<cr>:SyntasticReset<cr>
-"   autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-" augroup END
+nmap <silent> <leader><cr> :noh\|hi Cursor guibg=red<cr>
+augroup haskell
+  autocmd!
+  autocmd FileType haskell map <silent> <leader><cr> :noh<cr>:GhcModTypeClear<cr>:SyntasticReset<cr>
+  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+augroup END
 
 augroup last_edit
   autocmd!
@@ -292,99 +284,97 @@ augroup whitespace
   autocmd BufWrite *.scala :call DeleteTrailingWS()
 augroup END
 
-let g:tagbar_type_haskell = {
-    \ 'ctagsbin'  : 'hasktags',
-    \ 'ctagsargs' : '-x -c -o-',
-    \ 'kinds'     : [
-        \  'm:modules:0:1',
-        \  'd:data: 0:1',
-        \  'd_gadt: data gadt:0:1',
-        \  't:type names:0:1',
-        \  'nt:new types:0:1',
-        \  'c:classes:0:1',
-        \  'cons:constructors:1:1',
-        \  'c_gadt:constructor gadt:1:1',
-        \  'c_a:constructor accessors:1:1',
-        \  'ft:function types:1:1',
-        \  'fi:function implementations:0:1',
-        \  'o:others:0:1'
-    \ ],
-    \ 'sro'        : '.',
-    \ 'kind2scope' : {
-        \ 'm' : 'module',
-        \ 'c' : 'class',
-        \ 'd' : 'data',
-        \ 't' : 'type'
-    \ },
-    \ 'scope2kind' : {
-        \ 'module' : 'm',
-        \ 'class'  : 'c',
-        \ 'data'   : 'd',
-        \ 'type'   : 't'
-    \ }
-\ }
+" let g:tagbar_type_haskell = {
+"     \ 'ctagsbin'  : 'hasktags',
+"     \ 'ctagsargs' : '-x -c -o-',
+"     \ 'kinds'     : [
+"         \  'm:modules:0:1',
+"         \  'd:data: 0:1',
+"         \  'd_gadt: data gadt:0:1',
+"         \  't:type names:0:1',
+"         \  'nt:new types:0:1',
+"         \  'c:classes:0:1',
+"         \  'cons:constructors:1:1',
+"         \  'c_gadt:constructor gadt:1:1',
+"         \  'c_a:constructor accessors:1:1',
+"         \  'ft:function types:1:1',
+"         \  'fi:function implementations:0:1',
+"         \  'o:others:0:1'
+"     \ ],
+"     \ 'sro'        : '.',
+"     \ 'kind2scope' : {
+"         \ 'm' : 'module',
+"         \ 'c' : 'class',
+"         \ 'd' : 'data',
+"         \ 't' : 'type'
+"     \ },
+"     \ 'scope2kind' : {
+"         \ 'module' : 'm',
+"         \ 'class'  : 'c',
+"         \ 'data'   : 'd',
+"         \ 'type'   : 't'
+"     \ }
+" \ }
 
-set csprg=~/.vimscripts/hscope
+" set csprg=~/.vimscripts/hscope
 set csto=1
 set cst
 set csverb
 nnoremap <silent> <C-\> :cs find c <C-R>=expand("<cword>")<CR><CR>
 " Automatically make cscope connections
-function! LoadHscope()
-  let db = findfile("hscope.out", ".;")
-  if (!empty(db))
-    let path = strpart(db, 0, match(db, "/hscope.out$"))
-    set nocscopeverbose " suppress 'duplicate connection' error
-    exe "cs add " . db . " " . path
-    set cscopeverbose
-  endif
-endfunction
-au BufEnter /*.hs call LoadHscope()
+" function! LoadHscope()
+"   let db = findfile("hscope.out", ".;")
+"   if (!empty(db))
+"     let path = strpart(db, 0, match(db, "/hscope.out$"))
+"     set nocscopeverbose " suppress 'duplicate connection' error
+"     exe "cs add " . db . " " . path
+"     set cscopeverbose
+"   endif
+" endfunction
+" au BufEnter /*.hs call LoadHscope()
 
 set completeopt+=longest
 
 " Haskell stuff
 " Type of expression under cursor
-" nmap <silent> <leader>ht :GhcModType<CR>
+nmap <silent> <leader>ht :GhcModType<CR>
 " Insert type of expression under cursor
-" nmap <silent> <leader>hT :GhcModTypeInsert<CR>
+nmap <silent> <leader>hT :GhcModTypeInsert<CR>
 " GHC errors and warnings
 " nmap <silent> <leader>hc :SyntasticCheck ghc_mod<CR>
-" Haskell Lint
-" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['haskell'] }
-" nmap <silent> <leader>hl :SyntasticCheck hlint<CR>
+autocmd BufWritePost *.hs GhcModCheckAndLintAsync
 
 " Hoogle the word under the cursor
-nnoremap <silent> <leader>hh :Hoogle<CR>
+" nnoremap <silent> <leader>hh :Hoogle<CR>
 
-let g:hoogle_search_databases = "/home/brian/hoogle"
+" let g:hoogle_search_databases = "/home/brian/hoogle"
 " Hoogle and prompt for input
-nnoremap <leader>hH :Hoogle
+" nnoremap <leader>hH :Hoogle
 
 " Hoogle for detailed documentation (e.g. "Functor")
-nnoremap <silent> <leader>hi :HoogleInfo<CR>
+" nnoremap <silent> <leader>hi :HoogleInfo<CR>
 
 " Hoogle for detailed documentation and prompt for input
-nnoremap <leader>hI :HoogleInfo
+" nnoremap <leader>hI :HoogleInfo
 
 " Hoogle, close the Hoogle window
-nnoremap <silent> <leader>hz :HoogleClose<CR>
+" nnoremap <silent> <leader>hz :HoogleClose<CR>
 
 
-function! Pointfree()
-  call setline('.', split(system('pointfree '.shellescape(join(getline(a:firstline, a:lastline), "\n"))), "\n"))
-endfunction
-vnoremap <silent> <leader>h. :call Pointfree()<CR>
+" function! Pointfree()
+"   call setline('.', split(system('pointfree '.shellescape(join(getline(a:firstline, a:lastline), "\n"))), "\n"))
+" endfunction
+" vnoremap <silent> <leader>h. :call Pointfree()<CR>
 
-function! Pointful()
-  call setline('.', split(system('pointful '.shellescape(join(getline(a:firstline, a:lastline), "\n"))), "\n"))
-endfunction
-vnoremap <silent> <leader>h> :call Pointful()<CR>
+" function! Pointful()
+"   call setline('.', split(system('pointful '.shellescape(join(getline(a:firstline, a:lastline), "\n"))), "\n"))
+" endfunction
+" vnoremap <silent> <leader>h> :call Pointful()<CR>
 
-:let &makeprg='hdevtools check %'
-au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
-au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
-au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
+" :let &makeprg='hdevtools check %'
+" au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
+" au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
+" au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
 
 let g:slime_target = "tmux"
 let g:slime_paste_file = tempname()
