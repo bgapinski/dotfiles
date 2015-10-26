@@ -21,11 +21,14 @@ Config { font = "xft:Source Code Pro :size=12"
            , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
            , Run StdinReader
            , Run BatteryP [ "BAT1" ]
-                          [ "-t", "Batt: <left>%"
-                          , "--", "-O", "<fc=green>0n</fc> - ", "-o", ""
-                          , "-L", "-15", "-H", "-5"
-                          , "-l", "red", "-m", "blue", "-h", "green"
-                          ] 600
+                          [ "-t", "<acstatus>"
+                          , "-L", "15", "-H", "80"
+                          , "-l", "red", "-h", "green"
+                          , "--"
+                          , "-O", "Batt: <fc=green><left>+</fc>"  
+                          , "-o", "Batt: <left>%"
+                          , "-f", "/sys/class/power_supply/ADP1/online"
+                          ] 10
            , Run Brightness [ "-t", "Bright: <percent>%" 
                             , "--"
                             , "-D", "intel_backlight"
