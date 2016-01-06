@@ -34,11 +34,11 @@ Config { font = "xft:Source Code Pro :size=12"
                             , "-D", "intel_backlight"
                             ] 60
            , Run Kbd [("us(dvorak)", "DV"), ("us", "US")]
-           , Run Com "/home/brian/.scripts/get_stream" [] "stream" 10
+           , Run Com "/home/brian/.scripts/playerctl_metadata" [] "stream" 10
            ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%cpu% | %memory% | %wlp3s0% | %kbd% | %stream% } %StdinReader% { <fc=#ee9a00>%date%</fc>"
+       , template = "%cpu% | %memory% | %wlp3s0% | %kbd% } %StdinReader% { %stream%  <fc=#ee9a00>%date%</fc>"
        }
 
 -- "#d70000"   --Sol red
