@@ -1,8 +1,9 @@
+import Control.Monad
 import XMonad
 import XMonad.Actions.Search
+import XMonad.Actions.SpawnOn
 import XMonad.Config
 import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.UrgencyHook
@@ -12,7 +13,7 @@ import XMonad.Util.EZConfig
 
 import System.IO
 
-main = statusBar myBar myPP toggleStrutsKey (ewmh myConfig) >>= xmonad
+main = statusBar myBar myPP toggleStrutsKey myConfig >>= xmonad
 
 myBar = "xmobar"
 
@@ -66,11 +67,18 @@ searchList = [ ("g", google)
              , ("a", amazon)
              ]
 
-myStartupHook = setWMName "LG3D"
+myStartupHook = do
+    setWMName "LG3D"
+    void $ sequence [ spawnOn "1" "terminator -e tmux"
+                    , spawnOn "2" "chromium inbox.google.com facebook.com/messages"
+                    , spawnOn "3" "slack"
+                    ]
 
 myRemKeys = []
 
-myLayout = smartBorders $ (layoutHook defaultConfig) ||| noBorders Full
+myLayout = smartBorders $ layoutHook defaultConfig ||| noBorders Full
+
+myManageHook = manageSpawn <+> manageHook defaultConfig
 
 myConfig = defaultConfig
     { terminal          = myTerminal
@@ -80,5 +88,6 @@ myConfig = defaultConfig
     , clickJustFocuses  = myClickJustFocuses
     , layoutHook        = myLayout
     , startupHook       = myStartupHook
+    , manageHook        = myManageHook
     } `removeKeysP` myRemKeys
       `additionalKeysP` myKeys
