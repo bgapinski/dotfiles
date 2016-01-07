@@ -52,6 +52,13 @@ make_oh_my_zsh_custom_links () {
   make_syms "oh-my-zsh-custom/plugins" "oh-my-zsh/custom/plugins/"
 }
 
+make_tmux () {
+  mkdir -p ~/.tmux/plugins
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  ~/.tmux/plugins/tpm/bin/install_plugins
+}
+
 make_syms files
 make_nested_syms nested
 make_oh_my_zsh_custom_links
+make_tmux
