@@ -1,4 +1,5 @@
 files/tmux/resurrect/*
 files/vim/undo/*
 files/vim/bundle/*
+files/vim/backup/*
 fish_history*
