@@ -2,8 +2,11 @@ call plug#begin()
 
 " All the plugins
 Plug 'scrooloose/syntastic'
-" Plug 'Shougo/neocomplete.vim' " Does not work with neovim
-Plug 'Shougo/deoplete.nvim'
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim'
+else
+    Plug 'Shougo/neocomplete.vim' " Does not work with neovim
+endif
 Plug 'Shougo/vimproc.vim' "ghc-mod dependency
 " Plug 'Shougo/vimshell.vim'
 
@@ -16,13 +19,15 @@ Plug 'Townk/vim-autoclose'
 Plug 'airblade/vim-gitgutter'
 "Plug 'zhaocai/GoldenView.Vim'
 Plug 'bling/vim-airline'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'bkad/CamelCaseMotion'
 Plug 'sjl/gundo.vim'
 
 Plug 'moll/vim-bbye'
 Plug 'majutsushi/tagbar'
 Plug 'jpalardy/vim-slime'
+
+Plug 'dyng/ctrlsf.vim'
 
 " Language plugins
 " Plug 'neovimhaskell/haskell-vim'
@@ -136,14 +141,14 @@ nnoremap <Leader>d "+d
 vnoremap <Leader>p "+p
 nnoremap <Leader>p "+p
 
-nnoremap <Leader>bd :Bd<CR>
-nnoremap <Leader>bp :bp<CR>
-nnoremap <Leader>bn :bn<CR>
+" nnoremap <Leader>bd :bd<CR>
+" nnoremap <Leader>bp :bp<CR>
+" nnoremap <Leader>bn :bn<CR>
 nnoremap <Leader>tt :TagbarToggle<CR>
 map <leader>tg :!codex update<CR>:call system("git hscope")<CR><CR>:call LoadHscope()<CR>
 nnoremap <Leader>u :GundoToggle<CR>
 
-noremap <Leader>b<space> :CtrlPBuffer<CR>
+" noremap <Leader>b<space> :CtrlPBuffer<CR>
 
 nnoremap <Leader>ma :set mouse=a<CR>
 nnoremap <Leader>mo :set mouse=<CR>
@@ -269,6 +274,9 @@ nmap <leader>wh :leftabove  vnew<CR>
 nmap <leader>wl :rightbelow vnew<CR>
 nmap <leader>wk :leftabove  new<CR>
 nmap <leader>wj :rightbelow new<CR>
+
+nmap <leader>b <Plug>CtrlSFPrompt<CR>
+vmap <leader>b <Plug>CtrlSFVwordPath<CR>
 
 " Delete trailing white space on save
 func! DeleteTrailingWS()
