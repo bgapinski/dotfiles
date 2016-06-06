@@ -238,5 +238,5 @@ let g:ctrlp_map = '<Leader>e'
 
 " Neomake Config
 autocmd! BufWritePost * Neomake
-let g:neomake_open_list = 1
+let g:neomake_open_list = 2
 let g:neomake_python_enabled_makers = ['flake8']
