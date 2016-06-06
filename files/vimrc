@@ -4,6 +4,7 @@ call plug#begin()
 " TODO Replace syntastic with neomake
 Plug 'scrooloose/syntastic'
 " Split into vim and nvim compatible functions
+" Keyword completion
 if has('nvim')
     function! DoRemote(arg)
       UpdateRemotePlugins
@@ -17,37 +18,22 @@ endif
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-abolish'
-Plug 'Townk/vim-autoclose'
+Plug 'Townk/vim-autoclose' " Need to readdress what this actaully does
 Plug 'airblade/vim-gitgutter'
-"Plug 'zhaocai/GoldenView.Vim'
 Plug 'bling/vim-airline'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'bkad/CamelCaseMotion'
-Plug 'sjl/gundo.vim'
 
-Plug 'moll/vim-bbye'
-Plug 'majutsushi/tagbar'
-Plug 'jpalardy/vim-slime'
-
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dyng/ctrlsf.vim'
 
-" Language plugins
-" Plug 'neovimhaskell/haskell-vim'
-Plug 'bgapinski/vim2hs' "Personal fork
-" Plin 'eagletmt/ghcmod-vim'
-Plug 'eagletmt/neco-ghc'
-Plug 'Twinside/vim-hoogle'
-Plug 'idris-hackers/idris-vim'
-Plug 'tmux-plugins/vim-tmux'
-Plug 'nvie/vim-flake8'
-Plug 'derekwyatt/vim-scala'
-Plug 'dag/vim-fish'
+Plug 'jpalardy/vim-slime'
 
-"Instantly Better Plugins
-Plug 'shinokada/listtrans.vim'
-Plug 'atweiden/vim-vmath'
-Plug 'jondkinney/dragvisuals.vim'
+" Don't currently use because I don't use tags
+" Plug 'majutsushi/tagbar' 
+
+" Language plugins
+Plug 'tmux-plugins/vim-tmux'
+Plug 'dag/vim-fish'
 
 " Theme
 Plug 'w0ng/vim-hybrid'
@@ -170,9 +156,6 @@ nnoremap <Leader>d "+d
 vnoremap <Leader>p "+p
 nnoremap <Leader>p "+p
 
-nnoremap <Leader>tt :TagbarToggle<CR>
-nnoremap <Leader>u :GundoToggle<CR>
-
 nnoremap ; :
 nnoremap j gj
 nnoremap k gk
@@ -187,18 +170,11 @@ nmap <silent> <leader><cr> :noh\|hi Cursor guibg=red<cr>
 " Ex mode is never used
 map Q gq
 
-map <S-W> <Plug>CamelCaseMotion_w
-map <S-B> <Plug>CamelCaseMotion_b
-map <S-E> <Plug>CamelCaseMotion_e
-
 " Open window splits in various places
 nmap <leader>wh :leftabove  vnew<CR>
 nmap <leader>wl :rightbelow vnew<CR>
 nmap <leader>wk :leftabove  new<CR>
 nmap <leader>wj :rightbelow new<CR>
-
-nmap <leader>b <Plug>CtrlSFPrompt<CR>
-vmap <leader>b <Plug>CtrlSFVwordPath<CR>
 
 " Source vimrc after saving it
 augroup sourcing
@@ -232,6 +208,17 @@ augroup whitespace
   autocmd BufWrite *.py,*.hs,*.scala,*.c :call DeleteTrailingWS()
 augroup END
 
+" Plugin configuration
+
+" CamelCaseMotion bindings
+map <S-W> <Plug>CamelCaseMotion_w
+map <S-B> <Plug>CamelCaseMotion_b
+map <S-E> <Plug>CamelCaseMotion_e
+
+" CtrlSF Mappings
+nmap <leader>b <Plug>CtrlSFPrompt<CR>
+vmap <leader>b <Plug>CtrlSFVwordPath<CR>
+
 " Tmux-slime configuration
 let g:slime_no_mappings = 1
 let g:slime_target = "tmux"
@@ -241,7 +228,6 @@ xmap <leader>s <Plug>SlimeRegionSend
 nmap <leader>s <Plug>SlimeMotionSend
 nmap <leader>ss <Plug>SlimeLineSend
 
-" Various plugin initialization
 if has('nvim')
   let g:deoplete#enable_at_startup = 1
 else
