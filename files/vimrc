@@ -1,8 +1,8 @@
 call plug#begin()
 
 " All the plugins
-" TODO Replace syntastic with neomake
-Plug 'scrooloose/syntastic'
+Plug 'neomake/neomake'  " Alternative to syntastic that uses async
+
 " Split into vim and nvim compatible functions
 " Keyword completion
 if has('nvim')
@@ -111,8 +111,6 @@ set undofile
 
 set sessionoptions=blank,buffers,curdir,folds,globals,help,localoptions,options,resize,tabpages,winsize,winpos
 cmap w!! %!sudo tee > /dev/null %
-
-let $PATH = $PATH . ':' . expand("~/.vimscripts")
 
 set mouse=a
 
@@ -237,15 +235,7 @@ endif
 let g:airline#extensions#tabline#enabled = 1
 let g:ctrlp_map = '<Leader>e'
 
-" Syntastic Config
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-hi! link SignColumn LineNr
-hi! link SyntasticErrorSign ErrorMsg
-hi! link SyntasticWarningSign WarningMsg
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_highlighting = 1
-let g:syntastic_enable_signs = 1
+" Neomake Config
+autocmd! BufWritePost * Neomake
+let g:neomake_open_list = 1
+let g:neomake_python_enabled_makers = ['flake8']
