@@ -34,6 +34,7 @@ Plug 'jpalardy/vim-slime'
 " Language plugins
 Plug 'tmux-plugins/vim-tmux'
 Plug 'dag/vim-fish'
+Plug 'davidhalter/jedi-vim'
 
 " Theme
 Plug 'w0ng/vim-hybrid'
