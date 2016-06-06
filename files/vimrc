@@ -18,7 +18,7 @@ endif
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
-Plug 'Townk/vim-autoclose' " Need to readdress what this actaully does
+Plug 'Townk/vim-autoclose'
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
 Plug 'bkad/CamelCaseMotion'
