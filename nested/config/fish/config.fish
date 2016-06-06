@@ -5,5 +5,5 @@ if status --is-login
   end
 end
 
-fish_vi_mode
+fish_vi_key_bindings
 set -gx PATH /home/brian/.cabal/bin /home/brian/.scripts /usr/local/bin $PATH
