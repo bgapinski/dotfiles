@@ -19,9 +19,13 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
 Plug 'Townk/vim-autoclose'
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
 Plug 'bkad/CamelCaseMotion'
+
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dyng/ctrlsf.vim'
@@ -240,3 +244,8 @@ let g:ctrlp_map = '<Leader>e'
 autocmd! BufWritePost * Neomake
 let g:neomake_open_list = 2
 let g:neomake_python_enabled_makers = ['flake8']
+
+" UltiSnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
