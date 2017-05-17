@@ -29,15 +29,14 @@ fignore=(.o .hi .aux .pyc .class)
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias pacman="sudo powerpill"
+alias pacman="sudo pacman"
 alias tmux="tmux -2"
-alias python="ipython3"
-alias python2="ipython2"
 alias pip="pip3"
 alias vim="nvim"
 alias vmi="nvim"
-alias hibernate="systemctl hibernate"
 alias diff="colordiff"
+alias sl="ls"
+alias gti="git"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -64,7 +63,7 @@ OPP_INDICATOR="%{$fg_bold[yellow]%}[% O]% %{$reset_color%}"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(gitfast tmux-custom colored-man vi-mode-custom opp opp-surround pip systemd vundle)
+plugins=(zsh-nvm gitfast tmux-custom colored-man vi-mode-custom opp opp-surround pip systemd vundle)
 
 ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_AUTOQUIT=false
@@ -80,6 +79,8 @@ export PATH=/home/brian/.cabal/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr
 
 export WECHALLUSER="xechas"
 export WECHALLTOKEN="D5B30-17222-EDA30-4E1C4-BFF39-587BC"
+
+export ANDROID_HOME="/opt/android-sdk"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 # source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
