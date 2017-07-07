@@ -28,6 +28,7 @@ Plug 'bkad/CamelCaseMotion'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dyng/ctrlsf.vim'
 
+Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
 " Plug 'dag/vim-fish'
