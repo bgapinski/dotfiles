@@ -33,6 +33,7 @@ Plug 'mxw/vim-jsx'
 Plug 'editorconfig/editorconfig-vim'
 
 Plug 'idris-hackers/idris-vim'
+Plug 'udalov/kotlin-vim'
 
 " Theme
 Plug 'w0ng/vim-hybrid'
