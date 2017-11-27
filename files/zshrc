@@ -9,6 +9,9 @@ autoload -U colors && colors
 # time that oh-my-zsh is loaded.
 ZSH_THEME="gentoo"
 
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
 fancy-ctrl-z () {
     if [[ $#BUFFER -eq 0 ]]; then
         fg
@@ -24,7 +27,7 @@ zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 bindkey -v
 
-fignore=(.o .hi .aux .pyc .class)
+fignore=(.o .hi .aux .pyc .class .ibc)
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -63,7 +66,7 @@ OPP_INDICATOR="%{$fg_bold[yellow]%}[% O]% %{$reset_color%}"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(zsh-nvm gitfast tmux-custom colored-man vi-mode-custom opp opp-surround pip systemd vundle)
+plugins=(zsh-nvm gitfast tmux-custom colored-man vi-mode-custom opp opp-surround pip systemd)
 
 ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_AUTOQUIT=false

@@ -6,10 +6,7 @@ Plug 'neomake/neomake'  " Alternative to syntastic that uses async
 " Split into vim and nvim compatible functions
 " Keyword completion
 if has('nvim')
-    function! DoRemote(arg)
-      UpdateRemotePlugins
-    endfunction
-    Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+    Plug 'roxma/nvim-completion-manager'
 else
     Plug 'Shougo/neocomplete.vim'
 endif
@@ -35,8 +32,11 @@ Plug 'mxw/vim-jsx'
 
 Plug 'editorconfig/editorconfig-vim'
 
+Plug 'idris-hackers/idris-vim'
+
 " Theme
 Plug 'w0ng/vim-hybrid'
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
@@ -76,7 +76,7 @@ set laststatus=2
 
 set wildmenu
 set wildmode=list:longest,full
-set wildignore+=*.o,*.hi,*.aux,*.pyc,*.class
+set wildignore+=*.o,*.hi,*.aux,*.pyc,*.class,*.ibc
 
 " Show bad whitespace
 set list
@@ -133,7 +133,8 @@ endif
 
 set t_Co=256
 set background=dark
-colorscheme hybrid
+let base16colorspace=256
+colorscheme base16-tomorrow-night
 
 " Color long lines
 highlight ColorColumn ctermbg=magenta
@@ -145,6 +146,7 @@ hi! link Visual Search
 
 " Key rebindings
 let mapleader = "\<Space>"
+let maplocalleader = "\<Space>"
 
 nmap <Leader>ln :lnext<CR>
 nmap <Leader>lp :lprev<CR>
@@ -205,12 +207,6 @@ map <S-E> <Plug>CamelCaseMotion_e
 " CtrlSF Mappings
 nmap <leader>b <Plug>CtrlSFPrompt<CR>
 vmap <leader>b <Plug>CtrlSFVwordPath<CR>
-
-if has('nvim')
-  let g:deoplete#enable_at_startup = 1
-else
-  let g:neocomplete#enable_at_startup = 1
-endif
 
 let g:airline#extensions#tabline#enabled = 1
 let g:ctrlp_map = '<Leader>e'
