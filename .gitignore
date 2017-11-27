@@ -2,4 +2,7 @@ files/tmux/resurrect/*
 files/vim/undo/*
 files/vim/bundle/*
 files/vim/backup/*
+files/vim/autoload/*
+files/vim/plugged/*
+files/vim/.vim
 fish_history*
