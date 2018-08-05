@@ -1,3 +1,3 @@
 function pacman
-  sudo powerpill $argv
+  sudo pacman $argv
 end
