@@ -87,3 +87,13 @@ export ANDROID_HOME="/opt/android-sdk"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 # source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# tabtab source for electron-forge package
+# uninstall by removing these lines or running `tabtab uninstall electron-forge`
+[[ -f /home/brian/dev/simplifeye/dashboard/desktop/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /home/brian/dev/simplifeye/dashboard/desktop/node_modules/tabtab/.completions/electron-forge.zsh
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /home/brian/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/brian/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /home/brian/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh ]] && . /home/brian/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh
