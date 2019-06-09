@@ -1,6 +1,0 @@
-[submodule "oh-my-zsh"]
-	path = files/oh-my-zsh
-	url = https://github.com/robbyrussell/oh-my-zsh.git
-[submodule "oh-my-zsh-custom"]
-	path = oh-my-zsh-custom
-	url = git@github.com:bgapinski/oh-my-zsh-custom
