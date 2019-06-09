@@ -1,6 +1,6 @@
 [user]
-  email = bgapinski@gmail.com
   name = Brian Gapinski
+  email = bgapinski@gmail.com
 [push]
   default = simple
 [merge]
@@ -13,3 +13,5 @@
   status = true
   branch = true
   ui = true
+[url "git@github.com:"]
+  insteadOf = https://github.com/

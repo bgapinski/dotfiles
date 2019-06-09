@@ -29,18 +29,6 @@ bindkey -v
 
 fignore=(.o .hi .aux .pyc .class .ibc)
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias pacman="sudo pacman"
-alias tmux="tmux -2"
-alias pip="pip3"
-alias vim="nvim"
-alias vmi="nvim"
-alias diff="colordiff"
-alias sl="ls"
-alias gti="git"
-
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -66,7 +54,7 @@ OPP_INDICATOR="%{$fg_bold[yellow]%}[% O]% %{$reset_color%}"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(zsh-nvm gitfast tmux-custom colored-man vi-mode-custom opp opp-surround pip systemd)
+plugins=(nvm gitfast tmux-custom colored-man-pages pip systemd)
 
 ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_AUTOQUIT=false
@@ -97,3 +85,42 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /home/brian/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh ]] && . /home/brian/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh
+
+B_PREFIX=$(brew --prefix)/opt
+B_SUFFIX=libexec/gnubin
+COREUTILS=$B_PREFIX/coreutils/$B_SUFFIX
+BINUTILS=$B_PREFIX/binutils/$B_SUFFIX
+FINDUTILS=$B_PREFIX/findutils/$B_SUFFIX
+GREP=$B_PREFIX/grep/$B_SUFFIX
+SED=$B_PREFIX/gnu-sed/$B_SUFFIX
+TAR=$B_PREFIX/gnu-tar/$B_SUFFIX
+WHICH=$B_PREFIX/gnu-which/$B_SUFFIX
+
+export PATH=$COREUTILS:$BINUTILS:$FINDUTILS:$GREP:$SED:$TAR:$WHICH:/usr/local/opt/icu4c/bin:/usr/local/opt/icu4c/sbin:$PATH
+
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias pacman="sudo pacman"
+alias tmux="tmux -2"
+alias pip="pip3"
+alias vim="nvim"
+alias vmi="nvim"
+alias diff="colordiff"
+alias ls="ls --color=auto"
+alias sl="ls --color=auto"
+alias gti="git"
+
+export KUBECONFIG=~/.kube/config:~/.kube/microk8s-vm-config:$KUBECONFIG
+export PATH=~/go/bin:/home/brian/.cargo/bin:$PATH
+
+for i in ~/dev/bt/terraform/kubeconfig/*; do
+    [ -f "$i" ] && export KUBECONFIG=$KUBECONFIG:$i;
+done
+
+source <(kubectl completion zsh)
+
+autoload -Uz compinit
+compinit
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin

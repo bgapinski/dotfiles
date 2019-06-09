@@ -29,6 +29,8 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
+Plug 'luochen1990/rainbow'
+
 " Plug 'dag/vim-fish'
 
 Plug 'editorconfig/editorconfig-vim'
@@ -40,6 +42,7 @@ Plug 'ianks/vim-tsx'
 Plug 'amadeus/vim-mjml'
 Plug 'joukevandermaas/vim-ember-hbs'
 Plug 'hashivim/vim-terraform'
+Plug 'fatih/vim-go'
 
 " Theme
 Plug 'w0ng/vim-hybrid'
@@ -207,6 +210,9 @@ augroup END
 " Plugin configuration
 if has('nvim')
     let g:deoplete#enable_at_startup = 1
+    let g:deoplete#sources = {'_': ['ale']}
+else
+    let g:ale_completion_enabled = 1
 endif
 
 " CamelCaseMotion bindings
@@ -228,9 +234,8 @@ let g:ctrlp_map = '<Leader>e'
 " let g:neomake_javascript_enabled_makers = ['eslint']
 
 " ALE
-let g:ale_completion_enabled = 1
 let g:ale_linters_explicit = 1
-let g:ale_linters = { 'typescript': ['tslint'], 'javascript': ['eslint'], 'sass': ['sasslint'] }
+let g:ale_linters = { 'typescript': ['tslint'], 'javascript': ['eslint'], 'sass': ['sasslint'], 'go': ['golint'] }
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -238,3 +243,9 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 let g:jsx_ext_required = 0
+
+" Go
+let g:go_highlight_types = 1
+let g:go_highlight_functions = 1
+
+let g:rainbow_active = 0
