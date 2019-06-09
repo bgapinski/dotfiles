@@ -54,7 +54,7 @@ OPP_INDICATOR="%{$fg_bold[yellow]%}[% O]% %{$reset_color%}"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(nvm gitfast tmux-custom colored-man-pages pip systemd)
+plugins=(nvm gitfast colored-man-pages pip systemd)
 
 ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_AUTOQUIT=false
@@ -110,15 +110,6 @@ alias diff="colordiff"
 alias ls="ls --color=auto"
 alias sl="ls --color=auto"
 alias gti="git"
-
-export KUBECONFIG=~/.kube/config:~/.kube/microk8s-vm-config:$KUBECONFIG
-export PATH=~/go/bin:/home/brian/.cargo/bin:$PATH
-
-for i in ~/dev/bt/terraform/kubeconfig/*; do
-    [ -f "$i" ] && export KUBECONFIG=$KUBECONFIG:$i;
-done
-
-source <(kubectl completion zsh)
 
 autoload -Uz compinit
 compinit
