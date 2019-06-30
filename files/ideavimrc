@@ -1,0 +1,100 @@
+filetype plugin indent on
+
+syntax enable
+filetype plugin on
+
+"Plugins
+set surround
+
+" Basic settings
+set autoindent
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set smarttab
+set backspace=indent,eol,start
+set number
+set relativenumber
+set ruler
+set scrolloff=5
+set showmode
+set showcmd
+set hidden
+
+set autoread
+
+set ffs=unix
+
+set laststatus=2
+
+set wildmenu
+set wildmode=list:longest,full
+set wildignore+=*.o,*.hi,*.aux,*.pyc,*.class,*.ibc,*/node_modules/*
+
+" Show bad whitespace
+set list
+if &listchars ==# 'eol:$'
+  exec "set listchars=tab:\uBB\uBB,trail:\uB7,extends:>,precedes:<,nbsp:~"
+endif
+
+set cmdheight=1
+
+set shortmess=atI
+
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set showmatch
+
+set noerrorbells
+set vb t_vb=
+
+set clipboard+=unnamedplus
+
+set updatecount=0
+set lbr
+set tw=500
+set wrap
+
+set sessionoptions=blank,buffers,curdir,folds,globals,help,localoptions,options,resize,tabpages,winsize,winpos
+
+set completeopt+=longest
+
+set viminfo^=%
+set tm=2000
+
+" Key rebindings
+let mapleader = "\<Space>"
+let maplocalleader = "\<Space>"
+
+nmap <Leader>ln :lnext<CR>
+nmap <Leader>lp :lprev<CR>
+
+vnoremap <Leader>y "+y
+nnoremap <Leader>y "+y
+vnoremap <Leader>d "+d
+nnoremap <Leader>d "+d
+vnoremap <Leader>p "+p
+nnoremap <Leader>p "+p
+
+nnoremap ; :
+nnoremap j gj
+nnoremap k gk
+
+noremap <c-h> <c-w>h
+noremap <c-k> <c-w>k
+noremap <c-j> <c-w>j
+noremap <c-l> <c-w>l
+
+nmap <silent> <leader><cr> :noh\|hi Cursor guibg=red<cr>
+
+" Ex mode is never used
+map Q gq
+
+" Open window splits in various places
+nmap <leader>wh :leftabove  vnew<CR>
+nmap <leader>wl :rightbelow vnew<CR>
+nmap <leader>wk :leftabove  new<CR>
+nmap <leader>wj :rightbelow new<CR>
