@@ -98,3 +98,7 @@ nmap <leader>wh :leftabove  vnew<CR>
 nmap <leader>wl :rightbelow vnew<CR>
 nmap <leader>wk :leftabove  new<CR>
 nmap <leader>wj :rightbelow new<CR>
+
+nmap <silent> W [w
+nmap <silent> B [b
+nmap <silent> E ]w
