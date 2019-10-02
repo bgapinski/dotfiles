@@ -8,6 +8,7 @@ Plug 'w0rp/ale'
 " Keyword completion
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 else
     Plug 'Shougo/neocomplete.vim'
 endif
@@ -23,8 +24,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
 Plug 'bkad/CamelCaseMotion'
 
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dyng/ctrlsf.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+" Plug 'dyng/ctrlsf.vim'
 
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -35,14 +38,15 @@ Plug 'luochen1990/rainbow'
 
 Plug 'editorconfig/editorconfig-vim'
 
-Plug 'idris-hackers/idris-vim'
-Plug 'udalov/kotlin-vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'ianks/vim-tsx'
+" Plug 'idris-hackers/idris-vim'
+" Plug 'udalov/kotlin-vim'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'ianks/vim-tsx'
 Plug 'amadeus/vim-mjml'
 Plug 'joukevandermaas/vim-ember-hbs'
 Plug 'hashivim/vim-terraform'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'google/vim-jsonnet'
 
 " Theme
 Plug 'w0ng/vim-hybrid'
@@ -86,7 +90,7 @@ set laststatus=2
 
 set wildmenu
 set wildmode=list:longest,full
-set wildignore+=*.o,*.hi,*.aux,*.pyc,*.class,*.ibc,*/node_modules/*
+set wildignore+=*.o,*.hi,*.aux,*.pyc,*.class,*.ibc,*/node_modules/*,*/vendor/*
 
 " Show bad whitespace
 set list
@@ -210,7 +214,8 @@ augroup END
 " Plugin configuration
 if has('nvim')
     let g:deoplete#enable_at_startup = 1
-    let g:deoplete#sources = {'_': ['ale']}
+    autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+    " call deoplete#custom#option('sources', {'_': ['ale']})
 else
     let g:ale_completion_enabled = 1
 endif
@@ -221,11 +226,12 @@ map <S-B> <Plug>CamelCaseMotion_b
 map <S-E> <Plug>CamelCaseMotion_e
 
 " CtrlSF Mappings
-nmap <leader>b <Plug>CtrlSFPrompt<CR>
-vmap <leader>b <Plug>CtrlSFVwordPath<CR>
+" nmap <leader>b <Plug>CtrlSFPrompt<CR>
+" vmap <leader>b <Plug>CtrlSFVwordPath<CR>
 
 let g:airline#extensions#tabline#enabled = 1
-let g:ctrlp_map = '<Leader>e'
+" let g:ctrlp_map = '<Leader>e'
+nmap <Leader>e :FZF<CR>
 
 " Neomake Config
 " autocmd! BufWritePost * Neomake
@@ -238,9 +244,9 @@ let g:ale_linters_explicit = 1
 let g:ale_linters = { 'typescript': ['eslint'], 'javascript': ['eslint'], 'sass': ['sasslint'], 'go': ['golint'] }
 
 " UltiSnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 let g:jsx_ext_required = 0
 
@@ -249,3 +255,6 @@ let g:go_highlight_types = 1
 let g:go_highlight_functions = 1
 
 let g:rainbow_active = 0
+
+let g:deoplete#sources#go#gocode_binary = '$GOPATH/bin/gocode'
+let g:terraform_fmt_on_save=1

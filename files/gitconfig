@@ -6,7 +6,7 @@
 [merge]
   tool = meld
 [core]
-  editor = vim
+  editor = nvim
   pager = less -FRSX
 [color]
   diff = true

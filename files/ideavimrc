@@ -66,8 +66,8 @@ set viminfo^=%
 set tm=2000
 
 " Key rebindings
-let mapleader = "\<Space>"
-let maplocalleader = "\<Space>"
+" let mapleader = "\<Space>"
+" let maplocalleader = "\<Space>"
 
 nmap <Leader>ln :lnext<CR>
 nmap <Leader>lp :lprev<CR>
@@ -88,7 +88,7 @@ noremap <c-k> <c-w>k
 noremap <c-j> <c-w>j
 noremap <c-l> <c-w>l
 
-nmap <silent> <leader><cr> :noh\|hi Cursor guibg=red<cr>
+nmap <silent> <leader><cr> :noh<cr>
 
 " Ex mode is never used
 map Q gq

@@ -60,7 +60,7 @@ ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_AUTOQUIT=false
 
 source $ZSH/oh-my-zsh.sh
-export EDITOR=vim
+export EDITOR=nvim
 
 export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
 export LESS=" -R "
