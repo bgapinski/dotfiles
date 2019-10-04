@@ -21,7 +21,8 @@ Plug 'tpope/vim-dispatch'
 Plug 'Townk/vim-autoclose'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'bkad/CamelCaseMotion'
 
 " Plug 'ctrlpvim/ctrlp.vim'
@@ -45,6 +46,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'amadeus/vim-mjml'
 Plug 'joukevandermaas/vim-ember-hbs'
 Plug 'hashivim/vim-terraform'
+Plug 'towolf/vim-helm'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'google/vim-jsonnet'
 
@@ -229,7 +231,10 @@ map <S-E> <Plug>CamelCaseMotion_e
 " nmap <leader>b <Plug>CtrlSFPrompt<CR>
 " vmap <leader>b <Plug>CtrlSFVwordPath<CR>
 
+" Airline
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#ale#enabled = 1
+let g:airline_theme = 'bubblegum'
 " let g:ctrlp_map = '<Leader>e'
 nmap <Leader>e :FZF<CR>
 
@@ -240,8 +245,8 @@ nmap <Leader>e :FZF<CR>
 " let g:neomake_javascript_enabled_makers = ['eslint']
 
 " ALE
-let g:ale_linters_explicit = 1
-let g:ale_linters = { 'typescript': ['eslint'], 'javascript': ['eslint'], 'sass': ['sasslint'], 'go': ['golint'] }
+" let g:ale_linters_explicit = 1
+let g:ale_linters = { 'typescript': ['eslint'], 'javascript': ['eslint'], 'sass': ['sasslint'] }
 
 " UltiSnips
 " let g:UltiSnipsExpandTrigger="<tab>"
